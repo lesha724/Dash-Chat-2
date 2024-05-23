@@ -14,6 +14,7 @@ class MessageListOptions {
     this.onLoadEarlier,
     this.typingBuilder,
     this.scrollPhysics,
+    this.emptyViewBuilder
   });
 
   /// If you want to who a date separator between messages of different dates
@@ -42,6 +43,9 @@ class MessageListOptions {
 
   /// If you want to show a widget when the top of the list is reached
   final Widget? loadEarlierBuilder;
+
+  /// If you want to show a widget when messages list is empty
+  final Widget Function()? emptyViewBuilder;
 
   /// Function to call when the top of the list is reached
   /// Useful to load more messages
