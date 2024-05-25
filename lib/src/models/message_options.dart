@@ -68,7 +68,7 @@ class MessageOptions {
   /// Builder to create your own avatar
   /// You can use DefaultAvatar to only override some variables
   final Widget Function(
-          ChatUser, Function? onPressAvatar, Function? onLongPressAvatar)?
+          ChatUser, Function(ChatUser)? onPressAvatar, Function(ChatUser)? onLongPressAvatar)?
       avatarBuilder;
 
   /// Function to call when the user press on an avatar
