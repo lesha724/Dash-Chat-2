@@ -119,6 +119,10 @@ class MessageRow extends StatelessWidget {
                             message: message,
                             isOwnMessage: isOwnMessage,
                             messageOptions: messageOptions,
+                            isNextSameAuthor: isNextSameAuthor,
+                            isPreviousSameAuthor: isPreviousSameAuthor,
+                            isAfterDateSeparator: isAfterDateSeparator,
+                            isBeforeDateSeparator: isBeforeDateSeparator,
                           ),
                   if (message.text.isNotEmpty)
                     TextContainer(
@@ -143,6 +147,10 @@ class MessageRow extends StatelessWidget {
                             message: message,
                             isOwnMessage: isOwnMessage,
                             messageOptions: messageOptions,
+                            isNextSameAuthor: isNextSameAuthor,
+                            isPreviousSameAuthor: isPreviousSameAuthor,
+                            isAfterDateSeparator: isAfterDateSeparator,
+                            isBeforeDateSeparator: isBeforeDateSeparator,
                           ),
                   if (messageOptions.bottom != null)
                     messageOptions.bottom!(
