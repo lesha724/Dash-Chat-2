@@ -6,10 +6,6 @@ class MediaContainer extends StatelessWidget {
     required this.message,
     required this.isOwnMessage,
     this.messageOptions = const MessageOptions(),
-    this.isPreviousSameAuthor = false,
-    this.isNextSameAuthor = false,
-    this.isAfterDateSeparator = false,
-    this.isBeforeDateSeparator = false,
     Key? key,
   }) : super(key: key);
 
@@ -22,20 +18,8 @@ class MediaContainer extends StatelessWidget {
   /// Options to customize the behaviour and design of the messages
   final MessageOptions messageOptions;
 
-  /// If the previous message is from the same author as the current one
-  final bool isPreviousSameAuthor;
-
-  /// If the next message is from the same author as the current one
-  final bool isNextSameAuthor;
-
-  /// If the message is preceded by a date separator
-  final bool isAfterDateSeparator;
-
-  /// If the message is before by a date separator
-  final bool isBeforeDateSeparator;
-
   /// Get the right media widget according to its type
-  Widget getMedia(
+  Widget _getMedia(
     BuildContext context,
     ChatMedia media,
     double? height,
@@ -74,10 +58,6 @@ class MediaContainer extends StatelessWidget {
         return TextContainer(
           isOwnMessage: isOwnMessage,
           messageOptions: messageOptions,
-          isNextSameAuthor: isNextSameAuthor,
-          isPreviousSameAuthor: isPreviousSameAuthor,
-          isAfterDateSeparator: isAfterDateSeparator,
-          isBeforeDateSeparator: isBeforeDateSeparator,
           message: message,
           messageTextBuilder: (ChatMessage m, ChatMessage? p, ChatMessage? n) {
             return Row(
@@ -147,7 +127,7 @@ class MediaContainer extends StatelessWidget {
                             ), // Because transparent is causing an issue on flutter web
                       BlendMode.srcATop,
                     ),
-                    child: getMedia(
+                    child: _getMedia(
                       context,
                       m,
                       media.length > 1 ? gallerySize : null,
