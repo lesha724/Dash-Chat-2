@@ -73,6 +73,8 @@ class MediaType {
         return MediaType.video;
       case 'file':
         return MediaType.file;
+      case 'custom':
+        return MediaType.custom;
       default:
         throw UnsupportedError('$value is not a valid MediaType');
     }
@@ -81,4 +83,5 @@ class MediaType {
   static const MediaType image = MediaType._internal('image');
   static const MediaType video = MediaType._internal('video');
   static const MediaType file = MediaType._internal('file');
+  static const MediaType custom = MediaType._internal('custom');
 }
