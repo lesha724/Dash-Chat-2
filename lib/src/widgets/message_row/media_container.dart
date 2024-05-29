@@ -114,7 +114,7 @@ class MediaContainer extends StatelessWidget {
               ),
               child: GestureDetector(
                 onTap: messageOptions.onTapMedia != null
-                    ? () => messageOptions.onTapMedia!(m)
+                    ? () => messageOptions.onTapMedia!(message, m)
                     : null,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),

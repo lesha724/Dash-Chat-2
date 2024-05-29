@@ -195,7 +195,7 @@ class MessageOptions {
 
   /// Function to call when the user clicks on a media
   /// Will not work with the default video player
-  final void Function(ChatMedia media)? onTapMedia;
+  final void Function(ChatMessage message, ChatMedia media)? onTapMedia;
 
   /// Border radius of the chat bubbles
   ///
