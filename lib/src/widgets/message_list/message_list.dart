@@ -47,7 +47,7 @@ class MessageListState extends State<MessageList> {
   bool isLoadingMore = false;
   late ItemScrollController scrollController;
   late ItemPositionsListener itemPositionsListener;
-  late ScrollOffsetController scrollOffsetController;
+  //late ScrollOffsetController scrollOffsetController;
   //late ScrollOffsetListener scrollOffsetListener;
 
   @override
@@ -78,7 +78,7 @@ class MessageListState extends State<MessageList> {
                       padding: widget.readOnly ? null : EdgeInsets.zero,
                       itemScrollController: scrollController,
                       itemPositionsListener: itemPositionsListener,
-                      scrollOffsetController: scrollOffsetController,
+                      //scrollOffsetController: scrollOffsetController,
                       reverse: true,
                       itemCount: widget.messages.length,
                       itemBuilder: (BuildContext context, int i) {
