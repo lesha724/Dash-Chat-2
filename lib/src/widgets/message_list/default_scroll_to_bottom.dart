@@ -21,7 +21,7 @@ class DefaultScrollToBottom extends StatelessWidget {
   }) : super(key: key);
 
   /// Scroll controller of the chat list
-  final ScrollController scrollController;
+  final ItemScrollController scrollController;
 
   /// Background color of the button
   final Color? backgroundColor;
@@ -88,8 +88,8 @@ class DefaultScrollToBottom extends StatelessWidget {
             if (onScrollToBottomPress != null) {
               onScrollToBottomPress!();
             }
-            scrollController.animateTo(
-              0.0,
+            scrollController.scrollTo(
+              index: 0,
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
             );

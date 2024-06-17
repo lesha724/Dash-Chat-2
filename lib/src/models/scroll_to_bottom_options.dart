@@ -13,7 +13,7 @@ class ScrollToBottomOptions {
 
   /// Builder to create your own scroll-to-bottom widget
   /// You can use DefaultScrollToBottom to only override some variables
-  final Widget Function(ScrollController scrollController)?
+  final Widget Function(ItemScrollController scrollController)?
       scrollToBottomBuilder;
 
   /// Function to call when the scroll-to-bottom widget is pressed

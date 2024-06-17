@@ -45,13 +45,18 @@ class MessageList extends StatefulWidget {
 class MessageListState extends State<MessageList> {
   bool scrollToBottomIsVisible = false;
   bool isLoadingMore = false;
-  late ScrollController scrollController;
+  late ItemScrollController scrollController;
+  late ItemPositionsListener itemPositionsListener;
+  late ScrollOffsetController scrollOffsetController;
+  //late ScrollOffsetListener scrollOffsetListener;
 
   @override
   void initState() {
     scrollController =
-        widget.messageListOptions.scrollController ?? ScrollController();
-    scrollController.addListener(() => _onScroll());
+        widget.messageListOptions.scrollController ?? ItemScrollController();
+    itemPositionsListener =
+        widget.messageListOptions.itemPositionsListener ?? ItemPositionsListener.create();
+    itemPositionsListener.itemPositions.addListener(() => _onScroll());
     super.initState();
   }
 
@@ -68,10 +73,12 @@ class MessageListState extends State<MessageList> {
                 child:
                   widget.messages.isEmpty && widget.messageListOptions.emptyViewBuilder != null ?
                     widget.messageListOptions.emptyViewBuilder!() :
-                    ListView.builder(
+                    ScrollablePositionedList.builder(
                       physics: widget.messageListOptions.scrollPhysics,
                       padding: widget.readOnly ? null : EdgeInsets.zero,
-                      controller: scrollController,
+                      itemScrollController: scrollController,
+                      itemPositionsListener: itemPositionsListener,
+                      scrollOffsetController: scrollOffsetController,
                       reverse: true,
                       itemCount: widget.messages.length,
                       itemBuilder: (BuildContext context, int i) {
@@ -218,9 +225,10 @@ class MessageListState extends State<MessageList> {
   /// Scroll listener to trigger different actions:
   /// show scroll-to-bottom btn and LoadEarlier behaviour
   Future<void> _onScroll() async {
-    bool topReached =
-        scrollController.offset >= scrollController.position.maxScrollExtent &&
-            !scrollController.position.outOfRange;
+    int position = itemPositionsListener.itemPositions.value.first.index;
+    bool topReached = position == widget.messages.length-1;
+        /*scrollController.offset >= scrollController.position.maxScrollExtent &&
+            !scrollController.position.outOfRange*/;
     if (topReached &&
         widget.messageListOptions.onLoadEarlier != null &&
         !isLoadingMore) {
@@ -232,7 +240,7 @@ class MessageListState extends State<MessageList> {
       setState(() {
         isLoadingMore = false;
       });
-    } else if (scrollController.offset > 200) {
+    } else if (position != 0) {
       showScrollToBottom();
     } else {
       hideScrollToBottom();
