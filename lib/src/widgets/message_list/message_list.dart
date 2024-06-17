@@ -225,7 +225,7 @@ class MessageListState extends State<MessageList> {
   /// Scroll listener to trigger different actions:
   /// show scroll-to-bottom btn and LoadEarlier behaviour
   Future<void> _onScroll() async {
-    int position = itemPositionsListener.itemPositions.value.first.index;
+    int? position = itemPositionsListener.itemPositions.value.lastOrNull?.index;
     bool topReached = position == widget.messages.length-1;
         /*scrollController.offset >= scrollController.position.maxScrollExtent &&
             !scrollController.position.outOfRange*/;
@@ -240,7 +240,7 @@ class MessageListState extends State<MessageList> {
       setState(() {
         isLoadingMore = false;
       });
-    } else if (position != 0) {
+    } else if (itemPositionsListener.itemPositions.value.firstOrNull?.index != 0) {
       showScrollToBottom();
     } else {
       hideScrollToBottom();
