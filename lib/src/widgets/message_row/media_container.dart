@@ -6,8 +6,8 @@ class MediaContainer extends StatelessWidget {
     required this.message,
     required this.isOwnMessage,
     this.messageOptions = const MessageOptions(),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Message that contains the media to show
   final ChatMessage message;

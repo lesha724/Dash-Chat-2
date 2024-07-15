@@ -7,8 +7,8 @@ class DefaultDateSeparator extends StatelessWidget {
     this.messageListOptions = const MessageListOptions(),
     this.padding = const EdgeInsets.symmetric(vertical: 20),
     this.textStyle = const TextStyle(color: Colors.grey),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Date to show
   final DateTime date;

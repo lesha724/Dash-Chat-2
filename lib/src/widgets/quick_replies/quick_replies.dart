@@ -5,8 +5,8 @@ class QuickReplies extends StatelessWidget {
   const QuickReplies({
     required this.quickReplies,
     this.quickReplyOptions = const QuickReplyOptions(),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// List of quick replies to show
   final List<QuickReply> quickReplies;

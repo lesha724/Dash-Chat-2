@@ -5,8 +5,8 @@ class DefaultTypingBuilder extends StatelessWidget {
   const DefaultTypingBuilder({
     required this.user,
     this.text = 'is typing',
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// User that is typing
   final ChatUser user;

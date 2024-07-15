@@ -13,8 +13,8 @@ class TextContainer extends StatelessWidget {
     this.isAfterDateSeparator = false,
     this.isBeforeDateSeparator = false,
     this.messageTextBuilder,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Options to customize the behaviour and design of the messages
   final MessageOptions messageOptions;

@@ -44,7 +44,7 @@ class MessageOptions {
       TableHtmlExtension(),
       SvgHtmlExtension(),
     ],
-    this.htmlStyleSheet = const {}
+    this.htmlStyleSheet = const <String, Style>{}
   })  : _currentUserContainerColor = currentUserContainerColor,
         _currentUserTextColor = currentUserTextColor,
         _currentUserTimeTextColor = currentUserTimeTextColor,
@@ -101,7 +101,6 @@ class MessageOptions {
 
   /// Used to calculate [currentUserContainerColor]
   final Color? _currentUserContainerColor;
-
   /// Color of the current user text in chat bubbles
   ///
   /// Default to: `Theme.of(context).colorScheme.onPrimary`

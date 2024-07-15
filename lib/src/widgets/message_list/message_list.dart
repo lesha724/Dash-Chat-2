@@ -11,8 +11,8 @@ class MessageList extends StatefulWidget {
     this.quickReplyOptions = const QuickReplyOptions(),
     this.scrollToBottomOptions = const ScrollToBottomOptions(),
     this.typingUsers,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// The current user of the chat
   final ChatUser currentUser;
@@ -230,7 +230,7 @@ class MessageListState extends State<MessageList> {
     int? position = itemPositionsListener.itemPositions.value.lastOrNull?.index;
     bool topReached = position == widget.messages.length-1;
         /*scrollController.offset >= scrollController.position.maxScrollExtent &&
-            !scrollController.position.outOfRange*/;
+            !scrollController.position.outOfRange;*/
     if (topReached &&
         widget.messageListOptions.onLoadEarlier != null &&
         !isLoadingMore) {

@@ -10,8 +10,8 @@ class MessageRow extends StatelessWidget {
     this.isAfterDateSeparator = false,
     this.isBeforeDateSeparator = false,
     this.messageOptions = const MessageOptions(),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Current message to show
   final ChatMessage message;

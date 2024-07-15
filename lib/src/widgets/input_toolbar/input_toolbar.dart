@@ -6,8 +6,8 @@ class InputToolbar extends StatefulWidget {
     required this.currentUser,
     required this.onSend,
     this.inputOptions = const InputOptions(),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Options to custom the toolbar
   final InputOptions inputOptions;

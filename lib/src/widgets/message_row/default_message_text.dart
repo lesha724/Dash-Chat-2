@@ -6,8 +6,8 @@ class DefaultMessageText extends StatelessWidget {
     required this.message,
     required this.isOwnMessage,
     this.messageOptions = const MessageOptions(),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Message tha contains the text to show
   final ChatMessage message;
@@ -108,6 +108,13 @@ class DefaultMessageText extends StatelessWidget {
 
     if (isHtml) {
       Map<String, Style> styles = messageOptions.htmlStyleSheet;
+      styles['.message-body'] = Style(
+        color: isOwnMessage ?
+          messageOptions.currentUserTextColor(context) :
+          messageOptions.textColor,
+        textAlign: isOwnMessage ? TextAlign.right : TextAlign.left,
+        width: Width.auto()
+      );
       return Html(
         data: '<div class="message-body">$text</div>',
         style: styles,

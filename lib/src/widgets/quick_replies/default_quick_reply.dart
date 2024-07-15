@@ -5,8 +5,8 @@ class DefaultQuickReply extends StatelessWidget {
   const DefaultQuickReply({
     required this.quickReply,
     this.quickReplyOptions = const QuickReplyOptions(),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Options used to customize quick replies behaviour and design
   final QuickReplyOptions quickReplyOptions;

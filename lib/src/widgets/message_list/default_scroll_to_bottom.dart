@@ -17,8 +17,8 @@ class DefaultScrollToBottom extends StatelessWidget {
     this.icon = Icons.arrow_downward,
     this.iconSize = 18,
     this.onScrollToBottomPress,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Scroll controller of the chat list
   final ItemScrollController scrollController;

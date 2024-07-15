@@ -3,10 +3,10 @@ part of '../../../dash_chat_2.dart';
 /// @nodoc
 class TypingIndicator extends StatefulWidget {
   const TypingIndicator({
-    Key? key,
+    super.key,
     this.flashingCircleDarkColor = const Color(0xFF333333),
     this.flashingCircleBrightColor = const Color(0xFFaec1dd),
-  }) : super(key: key);
+  });
 
   /// Dark color in the animation
   final Color flashingCircleDarkColor;

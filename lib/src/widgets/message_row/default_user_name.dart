@@ -6,8 +6,8 @@ class DefaultUserName extends StatelessWidget {
     required this.user,
     this.style,
     this.padding,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// User to show
   final ChatUser user;

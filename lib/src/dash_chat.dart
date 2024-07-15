@@ -13,8 +13,8 @@ class DashChat extends StatelessWidget {
     this.scrollToBottomOptions = const ScrollToBottomOptions(),
     this.readOnly = false,
     this.typingUsers,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// The current user of the chat
   final ChatUser currentUser;
