@@ -107,7 +107,7 @@ class DefaultMessageText extends StatelessWidget {
     }
 
     if (isHtml) {
-      Map<String, Style> styles = messageOptions.htmlStyleSheet;
+      Map<String, Style> styles = messageOptions.htmlStyleSheet ?? <String, Style> {};
       styles['.message-body'] = Style(
         color: isOwnMessage ?
           messageOptions.currentUserTextColor(context) :

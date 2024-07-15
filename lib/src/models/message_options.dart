@@ -44,7 +44,7 @@ class MessageOptions {
       TableHtmlExtension(),
       SvgHtmlExtension(),
     ],
-    this.htmlStyleSheet = const <String, Style>{}
+    this.htmlStyleSheet
   })  : _currentUserContainerColor = currentUserContainerColor,
         _currentUserTextColor = currentUserTextColor,
         _currentUserTimeTextColor = currentUserTimeTextColor,
@@ -236,7 +236,7 @@ class MessageOptions {
   final MarkdownStyleSheet? markdownStyleSheet;
 
   /// Stylesheet for html message rendering
-  final Map<String, Style> htmlStyleSheet;
+  final Map<String, Style>? htmlStyleSheet;
 
   final List<HtmlExtension> htmlExtensions;
 }
