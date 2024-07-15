@@ -113,7 +113,6 @@ class DefaultMessageText extends StatelessWidget {
           messageOptions.currentUserTextColor(context) :
           messageOptions.textColor,
         textAlign: isOwnMessage ? TextAlign.right : TextAlign.left,
-        display: Display.inline
       );
       return Html(
         data: '<div class="message-body">$text</div>',
