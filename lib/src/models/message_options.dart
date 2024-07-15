@@ -40,7 +40,10 @@ class MessageOptions {
     this.timePadding = const EdgeInsets.only(top: 5),
     this.markdownStyleSheet,
     Color? timeTextColor,
-    this.htmlExtensions = const [],
+    this.htmlExtensions = const <HtmlExtension>[
+      TableHtmlExtension(),
+      SvgHtmlExtension(),
+    ],
     this.htmlStyleSheet = const {}
   })  : _currentUserContainerColor = currentUserContainerColor,
         _currentUserTextColor = currentUserTextColor,
