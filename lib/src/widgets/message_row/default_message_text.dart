@@ -109,9 +109,13 @@ class DefaultMessageText extends StatelessWidget {
     if (isHtml) {
       return Html(
         data: text,
-        extensions: const [
-          TableHtmlExtension(),
-          SvgHtmlExtension(),
+        style: messageOptions.htmlStyleSheet,
+        extensions: [
+          ...messageOptions.htmlExtensions,
+          ... const <HtmlExtension>[
+            TableHtmlExtension(),
+            SvgHtmlExtension(),
+          ]
         ],
         onLinkTap: (url, attributes,element) {
           if (url == null) {
