@@ -79,7 +79,7 @@ class DefaultMessageText extends StatelessWidget {
           if (mention != null) {
             res.add(getMention(context, mention));
           } else {
-            res.add(getParsePattern(context, part, message.isMarkdown));
+            res.add(getParsePattern(context, part, message.isMarkdown, message.isHtml));
           }
         });
         if (res.isNotEmpty) {
@@ -87,34 +87,52 @@ class DefaultMessageText extends StatelessWidget {
         }
       }
     }
-    return <Widget>[getParsePattern(context, message.text, message.isMarkdown)];
+    return <Widget>[getParsePattern(context, message.text, message.isMarkdown, message.isHtml)];
   }
 
-  Widget getParsePattern(BuildContext context, String text, bool isMarkdown) {
-    return isMarkdown
-        ? MarkdownBody(
-            data: text,
-            selectable: true,
-            styleSheet: messageOptions.markdownStyleSheet,
-            onTapLink: (String value, String? href, String title) {
-              if (href != null) {
-                openLink(href);
-              } else {
-                openLink(value);
-              }
-            },
-          )
-        : ParsedText(
-            parse: messageOptions.parsePatterns != null
-                ? messageOptions.parsePatterns!
-                : defaultParsePatterns,
-            text: text,
-            style: TextStyle(
-              color: isOwnMessage
-                  ? messageOptions.currentUserTextColor(context)
-                  : messageOptions.textColor,
-            ),
-          );
+  Widget getParsePattern(BuildContext context, String text, bool isMarkdown, bool isHtml) {
+    if (isMarkdown) {
+      return MarkdownBody(
+        data: text,
+        selectable: true,
+        styleSheet: messageOptions.markdownStyleSheet,
+        onTapLink: (String value, String? href, String title) {
+          if (href != null) {
+            openLink(href);
+          } else {
+            openLink(value);
+          }
+        },
+      );
+    }
+
+    if (isHtml) {
+      return Html(
+        data: text,
+        extensions: const [
+          TableHtmlExtension(),
+          SvgHtmlExtension(),
+        ],
+        onLinkTap: (url, attributes,element) {
+          if (url == null) {
+            return;
+          }
+          openLink(url);
+        }
+      );
+    }
+
+    return ParsedText(
+      parse: messageOptions.parsePatterns != null
+          ? messageOptions.parsePatterns!
+          : defaultParsePatterns,
+      text: text,
+      style: TextStyle(
+        color: isOwnMessage
+            ? messageOptions.currentUserTextColor(context)
+            : messageOptions.textColor,
+      ),
+    );
   }
 
   Widget getMention(BuildContext context, Mention mention) {

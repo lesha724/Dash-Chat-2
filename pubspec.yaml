@@ -4,7 +4,7 @@ version: 0.0.21
 homepage: https://github.com/SebastienBtr/Dash-Chat-2
 
 environment:
-  sdk: ">=2.12.0 <4.0.0"
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -17,6 +17,9 @@ dependencies:
   scrollable_positioned_list: ^0.3.8
   url_launcher: ^6.0.10
   video_player: ^2.2.5
+  flutter_html: any
+  flutter_html_table: any
+  flutter_html_svg: any
 
 dev_dependencies:
   flutter_lints: ^3.0.1

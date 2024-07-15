@@ -13,6 +13,7 @@ class ChatMessage {
     this.mentions,
     this.status = MessageStatus.none,
     this.replyTo,
+    this.isHtml = false,
   });
 
   /// Create a ChatMessage instance from json data
@@ -50,6 +51,9 @@ class ChatMessage {
 
   /// If the message is Markdown formatted then it will be converted to Markdown (by default it will be false)
   bool isMarkdown;
+
+  /// If the message is html formatted then it will be converted to Html (by default it will be false)
+  bool isHtml;
 
   /// Text of the message (optional because you can also just send a media)
   String text;
@@ -95,6 +99,7 @@ class ChatMessage {
       'status': status.toString(),
       'replyTo': replyTo?.toJson(),
       'isMarkdown': isMarkdown,
+      'isHtml': isHtml,
     };
   }
 }
