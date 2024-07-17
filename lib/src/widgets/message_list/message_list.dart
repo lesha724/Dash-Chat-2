@@ -156,17 +156,17 @@ class MessageListState extends State<MessageList> {
             ],
           ),
           if (isLoadingMore)
-            Positioned(
-              top: 8.0,
-              right: 0,
-              left: 0,
-              child: widget.messageListOptions.loadEarlierBuilder ??
-                  const Center(
-                    child: SizedBox(
-                      child: CircularProgressIndicator(),
-                    ),
+            widget.messageListOptions.loadEarlierBuilder ??
+              const Positioned(
+                top: 8.0,
+                right: 0,
+                left: 0,
+                child: Center(
+                  child: SizedBox(
+                    child: CircularProgressIndicator(),
                   ),
-            ),
+                ),
+              ),
           if (!widget.scrollToBottomOptions.disabled && scrollToBottomIsVisible)
             widget.scrollToBottomOptions.scrollToBottomBuilder != null
                 ? widget.scrollToBottomOptions
