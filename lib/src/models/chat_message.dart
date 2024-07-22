@@ -14,6 +14,7 @@ class ChatMessage {
     this.status = MessageStatus.none,
     this.replyTo,
     this.isHtml = false,
+    this.isSelected = false
   });
 
   /// Create a ChatMessage instance from json data
@@ -54,6 +55,8 @@ class ChatMessage {
 
   /// If the message is html formatted then it will be converted to Html (by default it will be false)
   bool isHtml;
+
+  bool isSelected;
 
   /// Text of the message (optional because you can also just send a media)
   String text;

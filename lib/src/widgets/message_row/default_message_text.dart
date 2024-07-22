@@ -109,9 +109,7 @@ class DefaultMessageText extends StatelessWidget {
     if (isHtml) {
       Map<String, Style> styles = messageOptions.htmlStyleSheet ?? <String, Style> {};
       styles['.message-body'] = Style(
-        color: isOwnMessage ?
-          messageOptions.currentUserTextColor(context) :
-          messageOptions.textColor,
+        color: messageOptions.getTextColor(context, isOwnMessage, message.isSelected),
           //textAlign: isOwnMessage ? TextAlign.right : TextAlign.left,
           //display: Display.inline
       );
@@ -134,9 +132,7 @@ class DefaultMessageText extends StatelessWidget {
           : defaultParsePatterns,
       text: text,
       style: TextStyle(
-        color: isOwnMessage
-            ? messageOptions.currentUserTextColor(context)
-            : messageOptions.textColor,
+        color: messageOptions.getTextColor(context, isOwnMessage, message.isSelected),
       ),
     );
   }
@@ -150,9 +146,7 @@ class DefaultMessageText extends StatelessWidget {
               ? messageOptions.onPressMention!(mention)
               : null,
         style: TextStyle(
-          color: isOwnMessage
-              ? messageOptions.currentUserTextColor(context)
-              : messageOptions.textColor,
+          color: messageOptions.getTextColor(context, isOwnMessage, message.isSelected),
           decoration: TextDecoration.none,
           fontWeight: FontWeight.w600,
         ),

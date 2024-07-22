@@ -44,7 +44,11 @@ class MessageOptions {
       TableHtmlExtension(),
       SvgHtmlExtension(),
     ],
-    this.htmlStyleSheet
+    this.htmlStyleSheet,
+    this.selectedContainerColor,
+    this.selectedTextColor,
+    this.currentUserSelectedContainerColor,
+    this.currentUserSelectedTextColor
   })  : _currentUserContainerColor = currentUserContainerColor,
         _currentUserTextColor = currentUserTextColor,
         _currentUserTimeTextColor = currentUserTimeTextColor,
@@ -99,6 +103,32 @@ class MessageOptions {
     return _currentUserContainerColor ?? Theme.of(context).primaryColor;
   }
 
+  Color getContainerColor(BuildContext context, bool isOwnMessage, bool isSelected) {
+    if (isOwnMessage) {
+      if (isSelected && currentUserSelectedContainerColor != null) {
+        return currentUserSelectedContainerColor!;
+      }
+      return currentUserContainerColor(context);
+    }
+    if (isSelected && selectedContainerColor != null) {
+      return selectedContainerColor!;
+    }
+    return containerColor;
+  }
+
+  Color getTextColor(BuildContext context, bool isOwnMessage, bool isSelected) {
+    if (isOwnMessage) {
+      if (isSelected && currentUserSelectedTextColor != null) {
+        return currentUserSelectedTextColor!;
+      }
+      return currentUserTextColor(context);
+    }
+    if (isSelected && selectedTextColor != null) {
+      return selectedTextColor!;
+    }
+    return textColor;
+  }
+
   /// Used to calculate [currentUserContainerColor]
   final Color? _currentUserContainerColor;
   /// Color of the current user text in chat bubbles
@@ -130,6 +160,11 @@ class MessageOptions {
   ///
   /// Default to: `Colors.black`
   final Color textColor;
+
+  final Color? selectedContainerColor;
+  final Color? selectedTextColor;
+  final Color? currentUserSelectedContainerColor;
+  final Color? currentUserSelectedTextColor;
 
   /// Color of other users time text in chat bubbles
   ///
