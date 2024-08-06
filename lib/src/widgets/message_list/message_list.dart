@@ -73,12 +73,9 @@ class MessageListState extends State<MessageList> {
                 child:
                   widget.messages.isEmpty && widget.messageListOptions.emptyViewBuilder != null ?
                     widget.messageListOptions.emptyViewBuilder!() :
-                    (
-                      Theme.of(context).platform == TargetPlatform.iOS ?
-                        _getList() :
-                        Scrollbar(
-                          child: _getList(),
-                        )
+                    Scrollbar(
+                      controller: scrollController.scrollController,
+                      child: _getList(),
                     )
               ),
               if (widget.typingUsers != null && widget.typingUsers!.isNotEmpty)
