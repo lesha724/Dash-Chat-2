@@ -74,6 +74,8 @@ class MessageListState extends State<MessageList> {
                   widget.messages.isEmpty && widget.messageListOptions.emptyViewBuilder != null ?
                     widget.messageListOptions.emptyViewBuilder!() :
                     Scrollbar(
+                      controller: PrimaryScrollController.of(context),
+                      thumbVisibility: true,
                       child: ScrollablePositionedList.builder(
                         physics: widget.messageListOptions.scrollPhysics,
                         padding: widget.readOnly ? null : EdgeInsets.zero,
