@@ -52,6 +52,8 @@ class DashChat extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: SafeArea(
+            bottom: false,
+            top: false,
             child: MessageList(
               currentUser: currentUser,
               messages: messages,
