@@ -62,12 +62,11 @@ class InputToolbarState extends State<InputToolbar>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: Container(
-        padding: widget.inputOptions.inputToolbarPadding,
-        margin: widget.inputOptions.inputToolbarMargin,
-        decoration: widget.inputOptions.inputToolbarStyle,
+    return Container(
+      padding: widget.inputOptions.inputToolbarPadding,
+      margin: widget.inputOptions.inputToolbarMargin,
+      decoration: widget.inputOptions.inputToolbarStyle,
+      child: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -122,8 +121,8 @@ class InputToolbarState extends State<InputToolbar>
               widget.inputOptions.sendButtonBuilder != null
                   ? widget.inputOptions.sendButtonBuilder!(_sendMessage)
                   : defaultSendButton(color: Theme.of(context).primaryColor)(
-                      _sendMessage,
-                    ),
+                _sendMessage,
+              ),
             if (widget.inputOptions.trailing != null &&
                 !widget.inputOptions.showTraillingBeforeSend)
               ...widget.inputOptions.trailing!,
