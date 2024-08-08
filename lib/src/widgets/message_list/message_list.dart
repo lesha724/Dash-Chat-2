@@ -132,7 +132,7 @@ class MessageListState extends State<MessageList> {
   {
     return ScrollablePositionedList.builder(
       physics: widget.messageListOptions.scrollPhysics,
-      padding: widget.readOnly ? null : EdgeInsets.zero,
+      padding: widget.messageListOptions.listPadding,
       itemScrollController: scrollController,
       itemPositionsListener: itemPositionsListener,
       //scrollOffsetController: scrollOffsetController,
