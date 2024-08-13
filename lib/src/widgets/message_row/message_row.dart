@@ -74,12 +74,17 @@ class MessageRow extends StatelessWidget {
             isOwnMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: <Widget>[
           if (messageOptions.showOtherUsersAvatar)
-            Opacity(
-              opacity:
-                  !isOwnMessage && (!isNextSameAuthor || isBeforeDateSeparator)
-                      ? 1
-                      : 0,
-              child: getAvatar(),
+            (
+              !isOwnMessage && (!isNextSameAuthor || isBeforeDateSeparator) ?
+                getAvatar() :
+                (
+                  messageOptions.hiddenAvatarBuilder != null ?
+                    messageOptions.hiddenAvatarBuilder!(message.user) :
+                    Opacity(
+                      opacity: 0,
+                      child: getAvatar(),
+                    )
+                )
             ),
           if (!messageOptions.showOtherUsersAvatar)
             SizedBox(width: messageOptions.spaceWhenAvatarIsHidden),
@@ -152,9 +157,17 @@ class MessageRow extends StatelessWidget {
             ),
           ),
           if (messageOptions.showCurrentUserAvatar)
-            Opacity(
-              opacity: isOwnMessage && !isNextSameAuthor ? 1 : 0,
-              child: getAvatar(),
+            (
+              isOwnMessage && !isNextSameAuthor ?
+                getAvatar() :
+                (
+                  messageOptions.hiddenAvatarBuilder != null ?
+                    messageOptions.hiddenAvatarBuilder!(message.user) :
+                    Opacity(
+                      opacity: 0,
+                      child: getAvatar(),
+                    )
+                )
             ),
           if (!messageOptions.showCurrentUserAvatar)
             SizedBox(width: messageOptions.spaceWhenAvatarIsHidden),

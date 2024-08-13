@@ -2,6 +2,7 @@ part of '../../dash_chat_2.dart';
 
 /// {@category Customization}
 class MessageOptions {
+
   const MessageOptions({
     this.showCurrentUserAvatar = false,
     this.showOtherUsersAvatar = true,
@@ -48,11 +49,14 @@ class MessageOptions {
     this.selectedContainerColor,
     this.selectedTextColor,
     this.currentUserSelectedContainerColor,
-    this.currentUserSelectedTextColor
+    this.currentUserSelectedTextColor,
+    this.hiddenAvatarBuilder
   })  : _currentUserContainerColor = currentUserContainerColor,
         _currentUserTextColor = currentUserTextColor,
         _currentUserTimeTextColor = currentUserTimeTextColor,
         _timeTextColor = timeTextColor;
+
+  final Widget Function(ChatUser user)? hiddenAvatarBuilder;
 
   /// Format of the time if [showTime] is true
   /// Default to: DateFormat('HH:mm')
