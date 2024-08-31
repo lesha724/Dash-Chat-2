@@ -79,7 +79,7 @@ class DefaultMessageText extends StatelessWidget {
           if (mention != null) {
             res.add(getMention(context, mention));
           } else {
-            res.add(getParsePattern(context, part, message.isMarkdown, message.isHtml));
+            res.add(getParsePattern(context, part, message.isHtml));
           }
         });
         if (res.isNotEmpty) {
@@ -87,25 +87,10 @@ class DefaultMessageText extends StatelessWidget {
         }
       }
     }
-    return <Widget>[getParsePattern(context, message.text, message.isMarkdown, message.isHtml)];
+    return <Widget>[getParsePattern(context, message.text, message.isHtml)];
   }
 
-  Widget getParsePattern(BuildContext context, String text, bool isMarkdown, bool isHtml) {
-    if (isMarkdown) {
-      return MarkdownBody(
-        data: text,
-        selectable: true,
-        styleSheet: messageOptions.markdownStyleSheet,
-        onTapLink: (String value, String? href, String title) {
-          if (href != null) {
-            openLink(href);
-          } else {
-            openLink(value);
-          }
-        },
-      );
-    }
-
+  Widget getParsePattern(BuildContext context, String text, bool isHtml) {
     if (isHtml) {
       Map<String, Style> styles = messageOptions.htmlStyleSheet ?? <String, Style> {};
       styles['.message-body'] = Style(

@@ -5,7 +5,6 @@ class ChatMessage {
   ChatMessage({
     required this.user,
     required this.createdAt,
-    this.isMarkdown = false,
     this.text = '',
     this.medias,
     this.quickReplies,
@@ -23,7 +22,6 @@ class ChatMessage {
       user: ChatUser.fromJson(jsonData['user'] as Map<String, dynamic>),
       createdAt: DateTime.parse(jsonData['createdAt'].toString()).toLocal(),
       text: jsonData['text']?.toString() ?? '',
-      isMarkdown: jsonData['isMarkdown']?.toString() == 'true',
       medias: jsonData['medias'] != null
           ? (jsonData['medias'] as List<dynamic>)
               .map((dynamic media) =>
@@ -49,9 +47,6 @@ class ChatMessage {
           : null,
     );
   }
-
-  /// If the message is Markdown formatted then it will be converted to Markdown (by default it will be false)
-  bool isMarkdown;
 
   /// If the message is html formatted then it will be converted to Html (by default it will be false)
   bool isHtml;
@@ -87,6 +82,9 @@ class ChatMessage {
   /// If the message is a reply of another one TODO:
   ChatMessage? replyTo;
 
+  /// String for highlight
+  String? highlightText;
+
   /// Convert a ChatMessage into a json
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -101,7 +99,6 @@ class ChatMessage {
       'mentions': mentions,
       'status': status.toString(),
       'replyTo': replyTo?.toJson(),
-      'isMarkdown': isMarkdown,
       'isHtml': isHtml,
     };
   }
