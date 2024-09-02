@@ -90,16 +90,24 @@ class DefaultMessageText extends StatelessWidget {
     return <Widget>[getParsePattern(context, message.text, message.isHtml)];
   }
 
-  Widget getParsePattern(BuildContext context, String text, bool isHtml) {
-    if (isHtml) {
-      Map<String, Style> styles = messageOptions.htmlStyleSheet ?? <String, Style> {};
-      styles['.message-body'] = Style(
-        color: messageOptions.getTextColor(context, isOwnMessage, message.isSelected),
-          //textAlign: isOwnMessage ? TextAlign.right : TextAlign.left,
-          //display: Display.inline
-      );
-      return Html(
-        data: '<div class="message-body">$text</div>',
+  Widget _renderHtml(BuildContext context, String html) {
+    Map<String, Style> styles = messageOptions.htmlStyleSheet ?? <String, Style> {};
+    styles['.message-body'] = Style(
+      color: messageOptions.getTextColor(context, isOwnMessage, message.isSelected),
+      //textAlign: isOwnMessage ? TextAlign.right : TextAlign.left,
+      //display: Display.inline
+    );
+    styles['.highlight-text'] = Style(
+      color: messageOptions.highlightTextColor ?? Theme.of(context).colorScheme.onPrimary,
+      backgroundColor: messageOptions.highlightBackgroundColor ?? Theme.of(context).colorScheme.primary,
+    );
+    styles['mark'] = Style(
+      color: messageOptions.highlightTextColor ?? Theme.of(context).colorScheme.onPrimary,
+      backgroundColor: messageOptions.highlightBackgroundColor ?? Theme.of(context).colorScheme.primary,
+    );
+
+    return Html(
+        data: '<div class="message-body">$html</div>',
         style: styles,
         extensions: messageOptions.htmlExtensions,
         onLinkTap: (url, attributes,element) {
@@ -108,7 +116,32 @@ class DefaultMessageText extends StatelessWidget {
           }
           openLink(url);
         }
-      );
+    );
+  }
+
+  Widget getParsePattern(BuildContext context, String text, bool isHtml) {
+    final highlightText = message.highlightText;
+    if (highlightText != null && highlightText != '') {
+      String html = text;
+      if (!isHtml) {
+        html = html.replaceAllMapped(RegExp(emailPattern), (match) {
+          return '<a href="${match.group(0)}">${match.group(0)}</a>';
+        });
+        html = html.replaceAllMapped(RegExp(emailPattern), (match) {
+          return '<a href="mailto:${match.group(0)}">${match.group(0)}</a>';
+        });
+        html = html.replaceAllMapped(RegExp(phonePattern), (match) {
+          return '<a href="tel:${match.group(0)}">${match.group(0)}</a>';
+        });
+      }
+      html = html.replaceAllMapped(RegExp("$highlightText(?![^<>]*(([\/\"']|]]|\b)>))"), (match) {
+        return '<span class=".highlight-text">${match.group(0)}</span>';
+      });
+      isHtml = true;
+    }
+
+    if (isHtml) {
+      return _renderHtml(context, text);
     }
 
     return ParsedText(

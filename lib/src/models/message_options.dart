@@ -49,7 +49,9 @@ class MessageOptions {
     this.selectedTextColor,
     this.currentUserSelectedContainerColor,
     this.currentUserSelectedTextColor,
-    this.hiddenAvatarBuilder
+    this.hiddenAvatarBuilder,
+    this.highlightBackgroundColor,
+    this.highlightTextColor
   })  : _currentUserContainerColor = currentUserContainerColor,
         _currentUserTextColor = currentUserTextColor,
         _currentUserTimeTextColor = currentUserTimeTextColor,
@@ -164,8 +166,12 @@ class MessageOptions {
   /// Default to: `Colors.black`
   final Color textColor;
 
+  final Color? highlightBackgroundColor;
+  final Color? highlightTextColor;
+
   final Color? selectedContainerColor;
   final Color? selectedTextColor;
+
   final Color? currentUserSelectedContainerColor;
   final Color? currentUserSelectedTextColor;
 
