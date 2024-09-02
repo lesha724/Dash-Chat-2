@@ -98,6 +98,7 @@ class DefaultMessageText extends StatelessWidget {
       //display: Display.inline
     );
     styles['.highlight-text'] = Style(
+      display: Display.inline,
       color: messageOptions.highlightTextColor ?? Theme.of(context).colorScheme.onPrimary,
       backgroundColor: messageOptions.highlightBackgroundColor ?? Theme.of(context).colorScheme.primary,
     );
@@ -124,7 +125,8 @@ class DefaultMessageText extends StatelessWidget {
     if (highlightText != null && highlightText != '') {
       String html = text;
       if (!isHtml) {
-        html = html.replaceAllMapped(RegExp(emailPattern), (match) {
+        var urlPattern = r"(http(s)?):\/\/[(www\.)?a-zA-Z0-9@:._\+-~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:_\+.~#?&\/\/=]*)";
+        html = html.replaceAllMapped(RegExp(urlPattern), (match) {
           return '<a href="${match.group(0)}">${match.group(0)}</a>';
         });
         html = html.replaceAllMapped(RegExp(emailPattern), (match) {
