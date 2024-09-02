@@ -120,7 +120,7 @@ class DefaultMessageText extends StatelessWidget {
   }
 
   Widget getParsePattern(BuildContext context, String text, bool isHtml) {
-    final highlightText = message.highlightText;
+    final String? highlightText = message.highlightText;
     if (highlightText != null && highlightText != '') {
       String html = text;
       if (!isHtml) {
@@ -135,9 +135,9 @@ class DefaultMessageText extends StatelessWidget {
         });
       }
       html = html.replaceAllMapped(RegExp("$highlightText(?![^<>]*(([\/\"']|]]|\b)>))"), (match) {
-        return '<span class=".highlight-text">${match.group(0)}</span>';
+        return '<span class="highlight-text">${match.group(0)}</span>';
       });
-      isHtml = true;
+      return _renderHtml(context, html);
     }
 
     if (isHtml) {
