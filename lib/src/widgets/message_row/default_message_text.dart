@@ -79,7 +79,7 @@ class DefaultMessageText extends StatelessWidget {
           if (mention != null) {
             res.add(getMention(context, mention));
           } else {
-            res.add(getParsePattern(context, part, message.isHtml));
+            res.add(getParsePattern(context, part, message.isMarkdown, message.isHtml));
           }
         });
         if (res.isNotEmpty) {
@@ -87,7 +87,7 @@ class DefaultMessageText extends StatelessWidget {
         }
       }
     }
-    return <Widget>[getParsePattern(context, message.text, message.isHtml)];
+    return <Widget>[getParsePattern(context, message.text, message.isMarkdown, message.isHtml)];
   }
 
   Widget _renderHtml(BuildContext context, String html) {
@@ -98,7 +98,6 @@ class DefaultMessageText extends StatelessWidget {
       //display: Display.inline
     );
     styles['.highlight-text'] = Style(
-      display: Display.inline,
       color: messageOptions.highlightTextColor ?? Theme.of(context).colorScheme.onPrimary,
       backgroundColor: messageOptions.highlightBackgroundColor ?? Theme.of(context).colorScheme.primary,
     );
@@ -120,21 +119,28 @@ class DefaultMessageText extends StatelessWidget {
     );
   }
 
-  Widget getParsePattern(BuildContext context, String text, bool isHtml) {
+  Widget getParsePattern(BuildContext context, String text, bool isMarkdown, bool isHtml) {
     final String? highlightText = message.highlightText;
     if (highlightText != null && highlightText != '') {
       String html = text;
       if (!isHtml) {
-        var urlPattern = r"(http(s)?):\/\/[(www\.)?a-zA-Z0-9@:._\+-~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:_\+.~#?&\/\/=]*)";
-        html = html.replaceAllMapped(RegExp(urlPattern), (match) {
-          return '<a href="${match.group(0)}">${match.group(0)}</a>';
-        });
-        html = html.replaceAllMapped(RegExp(emailPattern), (match) {
-          return '<a href="mailto:${match.group(0)}">${match.group(0)}</a>';
-        });
-        html = html.replaceAllMapped(RegExp(phonePattern), (match) {
-          return '<a href="tel:${match.group(0)}">${match.group(0)}</a>';
-        });
+        if (isMarkdown) {
+          html = markdown.markdownToHtml(
+            html,
+            inlineSyntaxes: [markdown.InlineHtmlSyntax()]
+          );
+        } else {
+          var urlPattern = r"(http(s)?):\/\/[(www\.)?a-zA-Z0-9@:._\+-~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:_\+.~#?&\/\/=]*)";
+          html = html.replaceAllMapped(RegExp(urlPattern), (match) {
+            return '<a href="${match.group(0)}">${match.group(0)}</a>';
+          });
+          html = html.replaceAllMapped(RegExp(emailPattern), (match) {
+            return '<a href="mailto:${match.group(0)}">${match.group(0)}</a>';
+          });
+          html = html.replaceAllMapped(RegExp(phonePattern), (match) {
+            return '<a href="tel:${match.group(0)}">${match.group(0)}</a>';
+          });
+        }
       }
       html = html.replaceAllMapped(RegExp("$highlightText(?![^<>]*(([\/\"']|]]|\b)>))"), (match) {
         return '<span class="highlight-text">${match.group(0)}</span>';

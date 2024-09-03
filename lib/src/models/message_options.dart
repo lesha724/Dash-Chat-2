@@ -39,6 +39,7 @@ class MessageOptions {
     this.spaceWhenAvatarIsHidden = 10.0,
     this.timeFontSize = 10.0,
     this.timePadding = const EdgeInsets.only(top: 5),
+    this.markdownStyleSheet,
     Color? timeTextColor,
     this.htmlExtensions = const <HtmlExtension>[
       TableHtmlExtension(),
@@ -275,6 +276,9 @@ class MessageOptions {
   ///
   /// Default to: `const EdgeInsets.only(top: 5)`
   final EdgeInsets timePadding;
+
+  /// Stylesheet for markdown message rendering
+  final MarkdownStyleSheet? markdownStyleSheet;
 
   /// Stylesheet for html message rendering
   final Map<String, Style>? htmlStyleSheet;
