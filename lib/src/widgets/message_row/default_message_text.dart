@@ -152,6 +152,21 @@ class DefaultMessageText extends StatelessWidget {
       return _renderHtml(context, text);
     }
 
+    if (isMarkdown) {
+      return MarkdownBody(
+        data: text,
+        selectable: true,
+        styleSheet: messageOptions.markdownStyleSheet,
+        onTapLink: (String value, String? href, String title) {
+          if (href != null) {
+            openLink(href);
+          } else {
+            openLink(value);
+          }
+        },
+      );
+    }
+
     return ParsedText(
       parse: messageOptions.parsePatterns != null
           ? messageOptions.parsePatterns!
