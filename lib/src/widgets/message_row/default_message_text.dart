@@ -92,10 +92,15 @@ class DefaultMessageText extends StatelessWidget {
 
   Widget _renderHtml(BuildContext context, String html) {
     Map<String, Style> styles = messageOptions.htmlStyleSheet ?? <String, Style> {};
+    styles['body'] = Style(
+      padding: HtmlPaddings.zero,
+      margin: Margins.zero,
+    );
     styles['.message-body'] = Style(
       color: messageOptions.getTextColor(context, isOwnMessage, message.isSelected),
       //textAlign: isOwnMessage ? TextAlign.right : TextAlign.left,
-      //display: Display.inline
+      padding: HtmlPaddings.zero,
+      margin: Margins.zero,
     );
     styles['.highlight-text'] = Style(
       color: messageOptions.highlightTextColor ?? Theme.of(context).colorScheme.onPrimary,
@@ -109,6 +114,7 @@ class DefaultMessageText extends StatelessWidget {
     return Html(
         data: '<div class="message-body">$html</div>',
         style: styles,
+        shrinkWrap: true,
         extensions: messageOptions.htmlExtensions,
         onLinkTap: (url, attributes,element) {
           if (url == null) {
