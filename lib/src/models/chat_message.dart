@@ -87,6 +87,9 @@ class ChatMessage {
   /// If the message is a reply of another one TODO:
   ChatMessage? replyTo;
 
+  /// String for highlight
+  String? highlightText;
+
   /// Convert a ChatMessage into a json
   Map<String, dynamic> toJson() {
     return <String, dynamic>{

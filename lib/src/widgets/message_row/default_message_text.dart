@@ -90,31 +90,24 @@ class DefaultMessageText extends StatelessWidget {
     return <Widget>[getParsePattern(context, message.text, message.isMarkdown, message.isHtml)];
   }
 
-  Widget getParsePattern(BuildContext context, String text, bool isMarkdown, bool isHtml) {
-    if (isMarkdown) {
-      return MarkdownBody(
-        data: text,
-        selectable: true,
-        styleSheet: messageOptions.markdownStyleSheet,
-        onTapLink: (String value, String? href, String title) {
-          if (href != null) {
-            openLink(href);
-          } else {
-            openLink(value);
-          }
-        },
-      );
-    }
+  Widget _renderHtml(BuildContext context, String html) {
+    Map<String, Style> styles = messageOptions.htmlStyleSheet ?? <String, Style> {};
+    styles['.message-body'] = Style(
+      color: messageOptions.getTextColor(context, isOwnMessage, message.isSelected),
+      //textAlign: isOwnMessage ? TextAlign.right : TextAlign.left,
+      //display: Display.inline
+    );
+    styles['.highlight-text'] = Style(
+      color: messageOptions.highlightTextColor ?? Theme.of(context).colorScheme.onPrimary,
+      backgroundColor: messageOptions.highlightBackgroundColor ?? Theme.of(context).colorScheme.primary,
+    );
+    styles['mark'] = Style(
+      color: messageOptions.highlightTextColor ?? Theme.of(context).colorScheme.onPrimary,
+      backgroundColor: messageOptions.highlightBackgroundColor ?? Theme.of(context).colorScheme.primary,
+    );
 
-    if (isHtml) {
-      Map<String, Style> styles = messageOptions.htmlStyleSheet ?? <String, Style> {};
-      styles['.message-body'] = Style(
-        color: messageOptions.getTextColor(context, isOwnMessage, message.isSelected),
-          //textAlign: isOwnMessage ? TextAlign.right : TextAlign.left,
-          //display: Display.inline
-      );
-      return Html(
-        data: '<div class="message-body">$text</div>',
+    return Html(
+        data: '<div class="message-body">$html</div>',
         style: styles,
         extensions: messageOptions.htmlExtensions,
         onLinkTap: (url, attributes,element) {
@@ -123,7 +116,40 @@ class DefaultMessageText extends StatelessWidget {
           }
           openLink(url);
         }
-      );
+    );
+  }
+
+  Widget getParsePattern(BuildContext context, String text, bool isMarkdown, bool isHtml) {
+    final String? highlightText = message.highlightText;
+    if (highlightText != null && highlightText != '') {
+      String html = text;
+      if (!isHtml) {
+        if (isMarkdown) {
+          html = markdown.markdownToHtml(
+            html,
+            inlineSyntaxes: [markdown.InlineHtmlSyntax()]
+          );
+        } else {
+          var urlPattern = r"(http(s)?):\/\/[(www\.)?a-zA-Z0-9@:._\+-~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:_\+.~#?&\/\/=]*)";
+          html = html.replaceAllMapped(RegExp(urlPattern), (match) {
+            return '<a href="${match.group(0)}">${match.group(0)}</a>';
+          });
+          html = html.replaceAllMapped(RegExp(emailPattern), (match) {
+            return '<a href="mailto:${match.group(0)}">${match.group(0)}</a>';
+          });
+          html = html.replaceAllMapped(RegExp(phonePattern), (match) {
+            return '<a href="tel:${match.group(0)}">${match.group(0)}</a>';
+          });
+        }
+      }
+      html = html.replaceAllMapped(RegExp("$highlightText(?![^<>]*(([\/\"']|]]|\b)>))"), (match) {
+        return '<span class="highlight-text">${match.group(0)}</span>';
+      });
+      return _renderHtml(context, html);
+    }
+
+    if (isHtml) {
+      return _renderHtml(context, text);
     }
 
     return ParsedText(
