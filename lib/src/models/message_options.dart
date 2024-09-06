@@ -52,7 +52,8 @@ class MessageOptions {
     this.currentUserSelectedTextColor,
     this.hiddenAvatarBuilder,
     this.highlightBackgroundColor,
-    this.highlightTextColor
+    this.highlightTextColor,
+    this.maxWidthFactor = 0.7
   })  : _currentUserContainerColor = currentUserContainerColor,
         _currentUserTextColor = currentUserTextColor,
         _currentUserTimeTextColor = currentUserTimeTextColor,
@@ -223,6 +224,9 @@ class MessageOptions {
   ///
   /// Default to: `MediaQuery.of(context).size.width * 0.7`
   final double? maxWidth;
+
+  /// if [maxWidth] == null
+  final double maxWidthFactor;
 
   /// When a message have both an text and a list of media
   /// it will determine which one th show first
