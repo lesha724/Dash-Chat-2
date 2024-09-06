@@ -95,7 +95,7 @@ class MessageRow extends StatelessWidget {
             onTap: messageOptions.onPressMessage != null
                 ? () => messageOptions.onPressMessage!(message)
                 : null,
-            child: Flexible(
+            child: Expanded(
               child: ConstrainedBox(
                 constraints: BoxConstraints(
                   maxWidth: messageOptions.maxWidth ??
