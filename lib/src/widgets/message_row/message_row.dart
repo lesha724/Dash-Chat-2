@@ -88,14 +88,14 @@ class MessageRow extends StatelessWidget {
             ),
           if (!messageOptions.showOtherUsersAvatar)
             SizedBox(width: messageOptions.spaceWhenAvatarIsHidden),
-          GestureDetector(
-            onLongPress: messageOptions.onLongPressMessage != null
-                ? () => messageOptions.onLongPressMessage!(message)
-                : null,
-            onTap: messageOptions.onPressMessage != null
-                ? () => messageOptions.onPressMessage!(message)
-                : null,
-            child: Expanded(
+          Flexible(
+            child: GestureDetector(
+              onLongPress: messageOptions.onLongPressMessage != null
+                  ? () => messageOptions.onLongPressMessage!(message)
+                  : null,
+              onTap: messageOptions.onPressMessage != null
+                  ? () => messageOptions.onPressMessage!(message)
+                  : null,
               child: ConstrainedBox(
                 constraints: BoxConstraints(
                   maxWidth: messageOptions.maxWidth ??
