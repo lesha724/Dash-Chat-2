@@ -148,7 +148,7 @@ class DefaultMessageText extends StatelessWidget {
           });
         }
       }
-      html = html.replaceAllMapped(RegExp("$highlightText(?![^<>]*(([\/\"']|]]|\b)>))"), (match) {
+      html = html.replaceAllMapped(RegExp("$highlightText(?![^<>]*(([\/\"']|]]|\b)>))", caseSensitive: false), (match) {
         return '<span class="highlight-text">${match.group(0)}</span>';
       });
       return _renderHtml(context, html);
