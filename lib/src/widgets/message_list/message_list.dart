@@ -248,7 +248,7 @@ class MessageListState extends State<MessageList> {
       setState(() {
         isLoadingMore = false;
       });
-    } else if (itemPositionsListener.itemPositions.value.firstOrNull?.index != 0) {
+    } else if (itemPositionsListener.itemPositions.value.where((i) => i.index == 0 && i.itemLeadingEdge >= 0).firstOrNull == null) {
       showScrollToBottom();
     } else {
       hideScrollToBottom();
