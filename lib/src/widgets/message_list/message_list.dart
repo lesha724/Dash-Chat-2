@@ -237,18 +237,21 @@ class MessageListState extends State<MessageList> {
     bool topReached = position == widget.messages.length-1;
         /*scrollController.offset >= scrollController.position.maxScrollExtent &&
             !scrollController.position.outOfRange;*/
+    bool newestMessageHidden = itemPositionsListener.itemPositions.value.where((i) => i.index == 0 && i.itemLeadingEdge >= 0).firstOrNull == null;
     if (topReached &&
         widget.messageListOptions.onLoadEarlier != null &&
         !isLoadingMore) {
       setState(() {
         isLoadingMore = true;
       });
-      showScrollToBottom();
+      if (newestMessageHidden) {
+        showScrollToBottom();
+      }
       await widget.messageListOptions.onLoadEarlier!();
       setState(() {
         isLoadingMore = false;
       });
-    } else if (itemPositionsListener.itemPositions.value.where((i) => i.index == 0 && i.itemLeadingEdge >= 0).firstOrNull == null) {
+    } else if (newestMessageHidden) {
       showScrollToBottom();
     } else {
       hideScrollToBottom();

@@ -94,7 +94,7 @@ class DefaultMessageText extends StatelessWidget {
     Map<String, Style> styles = messageOptions.htmlStyleSheet ?? <String, Style> {};
     styles['body'] = Style(
       padding: HtmlPaddings.zero,
-      margin: Margins.zero,
+      margin: Margins.zero
     );
     styles['.message-body'] = Style(
       color: messageOptions.getTextColor(context, isOwnMessage, message.isSelected),
