@@ -244,14 +244,13 @@ class MessageListState extends State<MessageList> {
       setState(() {
         isLoadingMore = true;
       });
-      if (newestMessageHidden) {
-        showScrollToBottom();
-      }
       await widget.messageListOptions.onLoadEarlier!();
       setState(() {
         isLoadingMore = false;
       });
-    } else if (newestMessageHidden) {
+    }
+
+    if (newestMessageHidden) {
       showScrollToBottom();
     } else {
       hideScrollToBottom();
