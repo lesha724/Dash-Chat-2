@@ -27,6 +27,7 @@ class InputOptions {
     this.inputToolbarMargin = const EdgeInsets.only(top: 8.0),
     this.cursorStyle = const CursorStyle(),
     this.autocorrect = true,
+    this.top
   });
 
   /// Function to call when a mention is triggered in the input,
@@ -83,6 +84,9 @@ class InputOptions {
 
   /// A list of widget to show after the input
   final List<Widget>? trailing;
+
+  // A widget to show above the input bar
+  final Widget? top;
 
   /// To customize the text style of the input
   final TextStyle? inputTextStyle;
