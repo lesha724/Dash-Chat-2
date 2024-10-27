@@ -27,8 +27,12 @@ class InputOptions {
     this.inputToolbarMargin = const EdgeInsets.only(top: 8.0),
     this.cursorStyle = const CursorStyle(),
     this.autocorrect = true,
-    this.top
+    this.top,
+    this.builder
   });
+
+  /// Funtion to build custom input bar
+  final Widget Function(InputOptions options)? builder;
 
   /// Function to call when a mention is triggered in the input,
   /// ie: typing ' @'
