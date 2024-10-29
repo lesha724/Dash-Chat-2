@@ -28,8 +28,11 @@ class InputOptions {
     this.cursorStyle = const CursorStyle(),
     this.autocorrect = true,
     this.top,
-    this.builder
+    this.builder,
+    this.allowEmptyTextOnSend = false
   });
+
+  final bool allowEmptyTextOnSend;
 
   /// Funtion to build custom input bar
   final Widget Function(InputOptions options)? builder;
