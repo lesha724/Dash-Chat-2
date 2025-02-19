@@ -21,7 +21,7 @@ dependencies:
       ref: 'master'
       path: packages/scrollable_positioned_list/
   url_launcher: ^6.0.10
-  video_player: ^2.2.5
+  video_player: ^2.9.2
   flutter_html: any
   flutter_html_table: any
   flutter_html_svg: any
