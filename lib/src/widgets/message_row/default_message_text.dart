@@ -136,14 +136,14 @@ class DefaultMessageText extends StatelessWidget {
             inlineSyntaxes: [markdown.InlineHtmlSyntax()]
           );
         } else {
-          var urlPattern = r"(http(s)?):\/\/[(www\.)?a-zA-Z0-9@:._\+-~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:_\+.~#?&\/\/=]*)";
-          html = html.replaceAllMapped(RegExp(urlPattern), (match) {
+          String urlPattern = r'(http(s)?):\/\/[(www\.)?a-zA-Z0-9@:._\+-~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:_\+.~#?&\/\/=]*)';
+          html = html.replaceAllMapped(RegExp(urlPattern, multiLine: true, caseSensitive: false), (match) {
             return '<a href="${match.group(0)}">${match.group(0)}</a>';
           });
-          html = html.replaceAllMapped(RegExp(emailPattern), (match) {
+          html = html.replaceAllMapped(RegExp(emailPattern, multiLine: true, caseSensitive: false), (match) {
             return '<a href="mailto:${match.group(0)}">${match.group(0)}</a>';
           });
-          html = html.replaceAllMapped(RegExp(phonePattern), (match) {
+          html = html.replaceAllMapped(RegExp(phonePattern, multiLine: true, caseSensitive: false), (match) {
             return '<a href="tel:${match.group(0)}">${match.group(0)}</a>';
           });
         }
