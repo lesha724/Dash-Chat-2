@@ -94,13 +94,14 @@ class DefaultMessageText extends StatelessWidget {
     Map<String, Style> styles = messageOptions.htmlStyleSheet ?? <String, Style> {};
     styles['body'] = Style(
       padding: HtmlPaddings.zero,
-      margin: Margins.zero
+      margin: Margins.zero,
     );
     styles['.message-body'] = Style(
       color: messageOptions.getTextColor(context, isOwnMessage, message.isSelected),
       //textAlign: isOwnMessage ? TextAlign.right : TextAlign.left,
       padding: HtmlPaddings.zero,
       margin: Margins.zero,
+        backgroundColor: messageOptions.getContainerColor(context, isOwnMessage, message.isSelected)
     );
     styles['.highlight-text'] = Style(
       color: messageOptions.highlightTextColor ?? Theme.of(context).colorScheme.onPrimary,
