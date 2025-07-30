@@ -135,8 +135,8 @@ class MessageRow extends StatelessWidget {
                         isOwnMessage: isOwnMessage,
                         isNextSameAuthor: isNextSameAuthor || (!messageOptions.textBeforeMedia && message.medias?.isNotEmpty == true),
                         isPreviousSameAuthor: isPreviousSameAuthor || (messageOptions.textBeforeMedia && message.medias?.isNotEmpty == true),
-                        isAfterDateSeparator: isAfterDateSeparator,
-                        isBeforeDateSeparator: isBeforeDateSeparator,
+                        isAfterDateSeparator: isAfterDateSeparator && !(messageOptions.textBeforeMedia && message.medias?.isNotEmpty == true),
+                        isBeforeDateSeparator: isBeforeDateSeparator && !(!messageOptions.textBeforeMedia && message.medias?.isNotEmpty == true),
                         messageTextBuilder: messageOptions.messageTextBuilder,
                       ),
                     if (message.medias != null &&
