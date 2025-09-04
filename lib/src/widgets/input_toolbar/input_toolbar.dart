@@ -85,6 +85,7 @@ class InputToolbarState extends State<InputToolbar>
                       Directionality(
                         textDirection: widget.inputOptions.inputTextDirection,
                         child: TextField(
+                          contentInsertionConfiguration: widget.inputOptions.contentInsertionConfiguration,
                           focusNode: focusNode,
                           controller: textController,
                           enabled: !widget.inputOptions.inputDisabled,

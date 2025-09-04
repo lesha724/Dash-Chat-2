@@ -29,10 +29,13 @@ class InputOptions {
     this.autocorrect = true,
     this.top,
     this.builder,
-    this.allowEmptyTextOnSend = false
+    this.allowEmptyTextOnSend = false,
+    this.contentInsertionConfiguration
   });
 
   final bool allowEmptyTextOnSend;
+
+  final ContentInsertionConfiguration? contentInsertionConfiguration;
 
   /// Funtion to build custom input bar
   final Widget Function(InputOptions options)? builder;
