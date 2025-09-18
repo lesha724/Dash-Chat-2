@@ -30,7 +30,8 @@ class InputOptions {
     this.top,
     this.builder,
     this.allowEmptyTextOnSend = false,
-    this.contentInsertionConfiguration
+    this.contentInsertionConfiguration,
+    this.contextMenuBuilder
   });
 
   final bool allowEmptyTextOnSend;
@@ -121,4 +122,6 @@ class InputOptions {
 
   /// Whether to enable auto-correction. Defaults to true.
   final bool autocorrect;
+
+  final EditableTextContextMenuBuilder? contextMenuBuilder;
 }

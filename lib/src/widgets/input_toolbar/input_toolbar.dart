@@ -26,7 +26,7 @@ class InputToolbarState extends State<InputToolbar>
     with WidgetsBindingObserver {
   late TextEditingController textController;
   OverlayEntry? _overlayEntry;
-  int currentMentionIndex = -1;
+  //int currentMentionIndex = -1;
   String currentTrigger = '';
   late FocusNode focusNode;
 
@@ -85,6 +85,7 @@ class InputToolbarState extends State<InputToolbar>
                       Directionality(
                         textDirection: widget.inputOptions.inputTextDirection,
                         child: TextField(
+                          contextMenuBuilder: widget.inputOptions.contextMenuBuilder,
                           contentInsertionConfiguration: widget.inputOptions.contentInsertionConfiguration,
                           focusNode: focusNode,
                           controller: textController,
@@ -112,11 +113,11 @@ class InputToolbarState extends State<InputToolbar>
                             if (widget.inputOptions.onTextChange != null) {
                               widget.inputOptions.onTextChange!(value);
                             }
-                            WidgetsBinding.instance.addPostFrameCallback((_) async {
+                            /*WidgetsBinding.instance.addPostFrameCallback((_) async {
                               if (widget.inputOptions.onMention != null) {
                                 await _checkMentions(value);
                               }
-                            });
+                            });*/
                           },
                           autocorrect: widget.inputOptions.autocorrect,
                         ),
@@ -144,7 +145,7 @@ class InputToolbarState extends State<InputToolbar>
     );
   }
 
-  Future<void> _checkMentions(String text) async {
+  /*Future<void> _checkMentions(String text) async {
     bool hasMatch = false;
     for (final String trigger in widget.inputOptions.onMentionTriggers) {
       final RegExp regexp = RegExp(r'(?<![^\s<>])' + trigger + r'([^\s<>]+)$');
@@ -163,9 +164,9 @@ class InputToolbarState extends State<InputToolbar>
     if (!hasMatch) {
       _clearOverlay();
     }
-  }
+  }*/
 
-  void _onMentionClick(String value) {
+  /*void _onMentionClick(String value) {
     textController.text = textController.text.replaceRange(
       currentMentionIndex,
       textController.text.length,
@@ -175,7 +176,7 @@ class InputToolbarState extends State<InputToolbar>
       offset: textController.text.length,
     );
     _clearOverlay();
-  }
+  }*/
 
   void _clearOverlay() {
     if (_overlayEntry != null && _overlayEntry!.mounted) {
@@ -184,7 +185,7 @@ class InputToolbarState extends State<InputToolbar>
     }
   }
 
-  void _showMentionModal(List<Widget> children) {
+  /*void _showMentionModal(List<Widget> children) {
     final OverlayState overlay = Overlay.of(context);
     final RenderBox renderBox = context.findRenderObject() as RenderBox;
     final Offset topLeftCornerOffset = renderBox.localToGlobal(Offset.zero);
@@ -232,7 +233,7 @@ class InputToolbarState extends State<InputToolbar>
       },
     );
     overlay.insert(_overlayEntry!);
-  }
+  }*/
 
   void _sendMessage() {
     if (widget.inputOptions.allowEmptyTextOnSend || textController.text.isNotEmpty) {
