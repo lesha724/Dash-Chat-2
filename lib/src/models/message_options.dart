@@ -25,6 +25,7 @@ class MessageOptions {
     this.bottom,
     this.messageRowBuilder,
     this.messageTextBuilder,
+    this.replyToBuilder,
     this.parsePatterns,
     this.textBeforeMedia = true,
     this.onTapMedia,
@@ -60,6 +61,8 @@ class MessageOptions {
         _timeTextColor = timeTextColor;
 
   final Widget Function(ChatUser user)? hiddenAvatarBuilder;
+
+  final Widget Function(ChatMessage)? replyToBuilder;
 
   /// Format of the time if [showTime] is true
   /// Default to: DateFormat('HH:mm')

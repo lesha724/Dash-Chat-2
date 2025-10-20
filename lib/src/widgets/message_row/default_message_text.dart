@@ -24,6 +24,11 @@ class DefaultMessageText extends StatelessWidget {
       crossAxisAlignment:
           isOwnMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: <Widget>[
+        if (
+          message.replyTo != null &&
+          messageOptions.replyToBuilder != null
+        )
+          messageOptions.replyToBuilder!(message.replyTo!),
         Wrap(
           children: getMessage(context),
         ),
