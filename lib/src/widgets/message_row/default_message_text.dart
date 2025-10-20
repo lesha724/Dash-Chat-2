@@ -28,7 +28,7 @@ class DefaultMessageText extends StatelessWidget {
           message.replyTo != null &&
           messageOptions.replyToBuilder != null
         )
-          messageOptions.replyToBuilder!(message.replyTo!),
+          messageOptions.replyToBuilder!(message),
         Wrap(
           children: getMessage(context),
         ),
