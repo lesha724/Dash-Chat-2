@@ -62,7 +62,7 @@ class MessageOptions {
 
   final Widget Function(ChatUser user)? hiddenAvatarBuilder;
 
-  final Widget Function(ChatMessage)? replyToBuilder;
+  final Widget Function(ChatMessage message, bool isOwnMessage)? replyToBuilder;
 
   /// Format of the time if [showTime] is true
   /// Default to: DateFormat('HH:mm')
