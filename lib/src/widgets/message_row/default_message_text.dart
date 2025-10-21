@@ -20,14 +20,14 @@ class DefaultMessageText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    bool isRepliedMessage = message.replyTo != null &&
+        messageOptions.replyToBuilder != null &&
+        (messageOptions.textBeforeMedia || message.medias?.isNotEmpty != true);
+    final widget = Column(
       crossAxisAlignment:
           isOwnMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: <Widget>[
-        if (
-          message.replyTo != null &&
-          messageOptions.replyToBuilder != null
-        )
+        if (isRepliedMessage)
           messageOptions.replyToBuilder!(message),
         Wrap(
           children: getMessage(context),
@@ -50,6 +50,14 @@ class DefaultMessageText extends StatelessWidget {
                 ),
       ],
     );
+
+    if (isRepliedMessage) {
+      return IntrinsicWidth(
+        child: widget,
+      );
+    }
+
+    return widget;
   }
 
   List<Widget> getMessage(BuildContext context) {
