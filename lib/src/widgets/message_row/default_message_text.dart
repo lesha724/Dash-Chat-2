@@ -23,33 +23,41 @@ class DefaultMessageText extends StatelessWidget {
     bool isRepliedMessage = message.replyTo != null &&
         messageOptions.replyToBuilder != null &&
         (messageOptions.textBeforeMedia || message.medias?.isNotEmpty != true);
-    final widget = Column(
-      crossAxisAlignment:
-          isOwnMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+    Widget widget = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         if (isRepliedMessage)
           messageOptions.replyToBuilder!(message),
         Wrap(
           children: getMessage(context),
         ),
-        if (messageOptions.showTime)
-          messageOptions.messageTimeBuilder != null
-              ? messageOptions.messageTimeBuilder!(message, isOwnMessage)
-              : Padding(
-                  padding: messageOptions.timePadding,
-                  child: Text(
-                    (messageOptions.timeFormat ?? intl.DateFormat('HH:mm'))
-                        .format(message.createdAt),
-                    style: TextStyle(
-                      color: isOwnMessage
-                          ? messageOptions.currentUserTimeTextColor(context)
-                          : messageOptions.timeTextColor(),
-                      fontSize: messageOptions.timeFontSize,
-                    ),
-                  ),
-                ),
       ],
     );
+
+    if (messageOptions.showTime) {
+      widget = Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          widget,
+          if (messageOptions.messageTimeBuilder != null)
+            messageOptions.messageTimeBuilder!(message, isOwnMessage)
+          else Padding(
+            padding: messageOptions.timePadding,
+            child: Text(
+              (messageOptions.timeFormat ?? intl.DateFormat('HH:mm'))
+                  .format(message.createdAt),
+              style: TextStyle(
+                color: isOwnMessage
+                    ? messageOptions.currentUserTimeTextColor(context)
+                    : messageOptions.timeTextColor(),
+                fontSize: messageOptions.timeFontSize,
+              ),
+            ),
+          )
+        ],
+      );
+    }
 
     if (isRepliedMessage) {
       return IntrinsicWidth(
