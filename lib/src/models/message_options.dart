@@ -103,7 +103,7 @@ class MessageOptions {
   /// Function to call when the user long press on a message
   final Function(ChatMessage)? onLongPressMessage;
 
-  final Widget Function(ChatMessage)? textBottomBuilder;
+  final Widget? Function(ChatMessage)? textBottomBuilder;
 
   /// Function to call when the user press on a message
   final Function(ChatMessage)? onPressMessage;
