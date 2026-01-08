@@ -25,6 +25,7 @@ class MessageOptions {
     this.bottom,
     this.messageRowBuilder,
     this.messageTextBuilder,
+    this.textBottomBuilder,
     this.replyToBuilder,
     this.parsePatterns,
     this.textBeforeMedia = true,
@@ -99,6 +100,8 @@ class MessageOptions {
 
   /// Function to call when the user long press on a message
   final Function(ChatMessage)? onLongPressMessage;
+
+  final Widget Function(ChatMessage)? textBottomBuilder;
 
   /// Function to call when the user press on a message
   final Function(ChatMessage)? onPressMessage;

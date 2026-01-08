@@ -23,6 +23,9 @@ class DefaultMessageText extends StatelessWidget {
     bool isRepliedMessage = message.replyTo != null &&
         messageOptions.replyToBuilder != null &&
         (messageOptions.textBeforeMedia || message.medias?.isNotEmpty != true);
+    final Widget? bottom = messageOptions.textBottomBuilder != null ?
+      messageOptions.textBottomBuilder!(message) :
+      null;
     Widget widget = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -31,6 +34,8 @@ class DefaultMessageText extends StatelessWidget {
         Wrap(
           children: getMessage(context),
         ),
+        if (bottom != null)
+          bottom
       ],
     );
 
