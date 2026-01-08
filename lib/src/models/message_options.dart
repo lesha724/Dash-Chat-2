@@ -61,7 +61,7 @@ class MessageOptions {
         _currentUserTimeTextColor = currentUserTimeTextColor,
         _timeTextColor = timeTextColor;
 
-  final Widget Function(ChatUser user)? hiddenAvatarBuilder;
+  final Widget Function(ChatMessage message)? hiddenAvatarBuilder;
 
   final Widget Function(ChatMessage message, bool isOwnMessage)? replyToBuilder;
 
@@ -89,8 +89,10 @@ class MessageOptions {
   /// Builder to create your own avatar
   /// You can use DefaultAvatar to only override some variables
   final Widget Function(
-          ChatUser, Function(ChatUser)? onPressAvatar, Function(ChatUser)? onLongPressAvatar)?
-      avatarBuilder;
+      ChatMessage,
+      Function(ChatUser)? onPressAvatar,
+      Function(ChatUser)? onLongPressAvatar,
+  )? avatarBuilder;
 
   /// Function to call when the user press on an avatar
   final Function(ChatUser)? onPressAvatar;

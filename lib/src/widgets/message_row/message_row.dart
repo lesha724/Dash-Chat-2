@@ -38,7 +38,7 @@ class MessageRow extends StatelessWidget {
   Widget getAvatar() {
     return messageOptions.avatarBuilder != null
         ? messageOptions.avatarBuilder!(
-            message.user,
+            message,
             messageOptions.onPressAvatar,
             messageOptions.onLongPressAvatar,
           )
@@ -79,7 +79,7 @@ class MessageRow extends StatelessWidget {
                 getAvatar() :
                 (
                   messageOptions.hiddenAvatarBuilder != null ?
-                    messageOptions.hiddenAvatarBuilder!(message.user) :
+                    messageOptions.hiddenAvatarBuilder!(message) :
                     Opacity(
                       opacity: 0,
                       child: getAvatar(),
@@ -164,7 +164,7 @@ class MessageRow extends StatelessWidget {
                 getAvatar() :
                 (
                   messageOptions.hiddenAvatarBuilder != null ?
-                    messageOptions.hiddenAvatarBuilder!(message.user) :
+                    messageOptions.hiddenAvatarBuilder!(message) :
                     Opacity(
                       opacity: 0,
                       child: getAvatar(),
