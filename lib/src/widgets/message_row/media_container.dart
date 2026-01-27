@@ -118,8 +118,8 @@ class MediaContainer extends StatelessWidget {
                     colorFilter: ColorFilter.mode(
                       m.isUploading
                           ? Colors.white54
-                          : Colors.white.withOpacity(
-                              0.1,
+                          : Colors.white.withValues(
+                              alpha: 0.1,
                             ), // Because transparent is causing an issue on flutter web
                       BlendMode.srcATop,
                     ),
