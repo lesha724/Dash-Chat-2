@@ -25,6 +25,7 @@ dependencies:
   flutter_html: any
   flutter_html_table: any
   flutter_html_svg: any
+  custom_refresh_indicator: ^4.0.1
 
 dev_dependencies:
   flutter_lints: ^3.0.1

@@ -76,8 +76,10 @@ class MessageListState extends State<MessageList> {
                     Scrollbar(
                       controller: scrollController.scrollController,
                       child: widget.messageListOptions.onRefresh != null ?
-                        RefreshIndicator(
+                        CustomMaterialIndicator(
                           onRefresh: widget.messageListOptions.onRefresh!,
+                          // Set the trigger mode to the leading edge (bottom in a reversed list)
+                          triggerMode: IndicatorTriggerMode.onEdge,
                           child: _getList()
                         ) :
                         _getList(),
