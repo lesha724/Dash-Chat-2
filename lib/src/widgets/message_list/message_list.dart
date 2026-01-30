@@ -75,7 +75,12 @@ class MessageListState extends State<MessageList> {
                     widget.messageListOptions.emptyViewBuilder!() :
                     Scrollbar(
                       controller: scrollController.scrollController,
-                      child: _getList(),
+                      child: widget.messageListOptions.onRefresh != null ?
+                        RefreshIndicator(
+                          onRefresh: widget.messageListOptions.onRefresh!,
+                          child: _getList()
+                        ) :
+                        _getList(),
                     )
               ),
               if (widget.typingUsers != null && widget.typingUsers!.isNotEmpty)
